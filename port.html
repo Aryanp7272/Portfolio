@@ -1,0 +1,1167 @@
+    <html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>Portfolio</title>
+        
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg">
+
+
+        <style>
+            .rotate {
+                transform: rotateY(180deg) !important;
+            }
+            
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                background-color: #000;
+                color: #fff;
+                font-family: 'Arial', sans-serif;
+            }
+            #particles-js {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+            }
+            .skill-card {
+                perspective: 1000px;
+            }
+            .skill-card-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                transition: transform 0.6s;
+                transform-style: preserve-3d;
+            }
+            .skill-card:hover .skill-card-inner {
+                transform: rotateY(180deg);
+            }
+            .skill-card-front, .skill-card-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+                border-radius: 10px;
+                padding: 20px;
+                background-color: #000;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            .skill-card-back {
+                transform: rotateY(180deg);
+            }
+            .project-card {
+                position: relative;
+                background-color: #000;
+                border: 1px solid #fff;
+                border-radius: 10px;
+                padding: 20px;
+                width: 80%;
+                max-width: 400px;
+                margin: 20px;
+                transition: transform 0.3s;
+            }
+            .project-card:hover {
+                transform: scale(1.05);
+            }
+            .project-card .skills {
+                display: none;
+            }
+            .project-card:hover .skills {
+                display: block;
+            }
+            .project-card:hover .description {
+                display: none;
+            }
+            .text-shadow {
+                text-shadow: 3px 3px 6px rgba(50, 88, 5, 50 );
+            }
+            #particles-js {
+                position: fixed; /* Fixes the background */
+                width: 100vw; /* Full width */
+                height: 100vh; /* Full height */
+                top: 0;
+                left: 0;
+                z-index: -10; /* Keeps it behind everything */
+                background-color: black; /* Ensures black background */
+            }
+            /* Style to match black theme */
+            .custom-input {
+                width: 100%;
+                padding: 10px;
+                background-color: #000000; /* Pure Black */
+                border: 1px solid #2a2a2a; /* Subtle dark gray border */
+                color: white; /* White text */
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+
+            /* Add glowing effect on focus */
+            .custom-input:focus {
+                border-color: #00ff00; /* Green border glow */
+                outline: none;
+                box-shadow: 0 0 5px #00ff00;
+            }
+            .service-box {
+                background-color: black;
+                border: 2px solid white;
+                transform: perspective(1000px) rotateX(10deg);
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+            
+            /* Hover for desktop */
+            .service-box:hover {
+                transform: perspective(1000px) rotateX(0deg) translateY(-5px);
+                box-shadow: 0 10px 20px rgba(255, 255, 255, 0.5);
+            }
+            
+            /* Tap effect for mobile */
+            .service-box:active,
+            .service-box:focus-within {
+                transform: perspective(1000px) rotateX(0deg) translateY(-5px);
+                box-shadow: 0 10px 20px rgba(255, 255, 255, 0.5);
+            }
+        a:active {
+            color: blue; /* Change the color on tap */
+        }
+        p.mt-4.text-lg {
+            font-size: 22px; /* Increase text size */
+            line-height: 1.6; /* Improve readability */
+        }
+        </style>
+    </head>
+    <body class="bg-black text-white relative" id="body">
+
+<!-- ----------------------------navbar section------------------------ -->
+
+        <div id="particles-js"></div>
+        <header class="flex justify-between items-center px-6 py-4 h-14 bg-black fixed w-full z-50">
+            <div class="flex items-center space-x-3">
+                <img alt="Logo" class="w-12 h-12 rounded-full mt-4" src="pa.png" />
+                <div class="text-green-500 text-2xl font-bold mt-4">ARYAN POTE</div>
+            </div>
+        
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex space-x-6">
+                <a class="text-white hover:text-green-500" href="#">HOME</a>
+                <a class="text-white hover:text-green-500" href="#about">ABOUT</a>
+                <a class="text-white hover:text-green-500" href="ARYAN SANJAY POTE.pdf" download="ARYAN SANJAY POTE.pdf" target="_blank">RESUME</a>
+                <a class="text-white hover:text-green-500" href="#Services">SERVICES</a>
+                <a class="text-white hover:text-green-500" href="#projects">PROJECTS</a>
+                <a class="text-white hover:text-green-500" href="#inquiry">CONTACT</a>
+            </nav>
+        
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white focus:outline-none" id="menu-button">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </header>
+        
+        <!-- Mobile Menu (Initially Hidden) -->
+        <nav id="mobile-menu" class="hidden flex flex-col space-y-4 p-6 bg-black fixed top-16 w-full z-40 md:hidden">
+            <a class="text-white hover:text-green-500" href="#">HOME</a>
+                <a class="text-white hover:text-green-500" href="#about">ABOUT</a>
+                <a class="text-white hover:text-green-500" href="#ARYAN_SANJAY_POTE.pdf">RESUME</a>
+                <a class="text-white hover:text-green-500" href="#Services">SERVICES</a>
+                <a class="text-white hover:text-green-500" href="#projects">PROJECTS</a>
+                <a class="text-white hover:text-green-500" href="#inquiry">CONTACT</a>
+        </nav>
+
+
+<!-- ---------------------------------About------------------------------ -->
+
+        <main class="flex flex-col items-center justify-center min-h-screen relative z-10 p-6" id="about">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="text-center md:text-left md:w-1/2 p-6">
+                    <p class="text-green-500 text-3xl font-bold ">HI THERE,</p>
+                    <h1 class="text-5xl font-bold mt-2">
+                        I Am <span class="changing-word"></span>
+                    </h1>
+
+                    <p class="mt-4 text-lg">
+                        Aspiring full-stack developer with a strong foundation in web development, data-driven applications, and cloud-based solutions. Proficient in Python, Django, JavaScript, SQL, and MongoDB. Seeking to contribute to dynamic software projects while continuing to develop professionally.
+                    </p>
+                    <button onclick="confirmCall()" class="mt-6 px-6 py-3 bg-green-500 text-black font-bold rounded-full">
+                        Call Me
+                    </button>
+                    <section class="py-8">
+                        <div class="flex justify-left space-x-10 pl-4">
+                            <!-- LinkedIn -->
+                            <a href="https://www.linkedin.com/in/aryanpote" target="_blank" class="text-white text-5xl hover:text-blue-400">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <!-- GitHub -->
+                            <a href="https://github.com/Aryanp7272" target="_blank" class="text-white text-5xl hover:text-gray-400">
+                                <i class="fab fa-github"></i>
+                            </a>
+
+                            <!-- Twitter/X -->
+                            <a href="https://twitter.com/aryanpote72" target="_blank" class="text-white text-5xl hover:text-blue-500">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+
+                            <!-- Instagram -->
+                            <a href="https://www.instagram.com/___aryan___7272" target="_blank" class="text-white text-5xl hover:text-pink-500">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+
+                        </div>
+                    </section>
+                </div>
+                <div class="md:w-1/2 p-6">
+                    <img alt="Portrait of a man in a suit and tie" class="rounded-lg" height="400" src="Ap.png" width="600">
+                    </img>
+                    
+                </div>
+
+<!-- ------------------------Skills section--------------------------- -->
+                <div class="skill-card-back flex items-center justify-center">
+                    <p>Proficient in Python for web development and data analysis.</p>
+                </div>
+            </div>
+            <div class="mt-12 text-3xl font-bold text-shadow">
+                <span class="text-white">MY</span>
+                <span class="text-green-500">PORTFOLIO</span>
+            </div>
+            
+            <section class="p-6">
+                <h2 class="text-3xl font-bold text-center text-green-500">Skills</h2>
+                <div class="flex flex-wrap justify-center mt-6">
+                    <!-- Programming Languages -->
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/python.png" alt="Python Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">Python</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Proficient in Python for web development and data analysis.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/javascript.png" alt="JavaScript Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">JavaScript</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Experienced in JavaScript for front-end development.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/java-coffee-cup-logo.png" alt="Java Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">Java</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Experienced in Java for backend development.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/html-5.png" alt="HTML Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">HTML</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Proficient in HTML for web development.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">CSS</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Proficient in CSS for web design.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Frameworks -->
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/django.png" alt="Django Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">Django</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Skilled in using Django for building robust web applications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/bootstrap.png" alt="Bootstrap Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">Bootstrap</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Experienced in using Bootstrap for responsive design.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/flask.png" alt="Flask Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">Flask</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Skilled in using Flask for lightweight web applications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Data Analysis Tools -->
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/numpy.png" alt="NumPy Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">NumPy</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Proficient in using NumPy for numerical computations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/pandas.png" alt="Pandas Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">Pandas</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Experienced in using Pandas for data manipulation and analysis.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://matplotlib.org/_static/logo2_compressed.svg" alt="Matplotlib Logo" class="mb-2" width="80"/>
+
+                                <h3 class="text-xl font-bold">Matplotlib</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Skilled in using Matplotlib for data visualization.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://seaborn.pydata.org/_static/logo-wide-lightbg.svg" 
+                                alt="Seaborn Logo" class="mb-2" width="80"/>
+                                <h3 class="text-xl font-bold">Seaborn</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Experienced in using Seaborn for statistical data visualization.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <!-- <<img src="https://img.icons8.com/fluency/48/microsoft-excel.png" alt="Excel Logo" class="mb-2"> -->
+                                <h3 class="text-xl font-bold"> Microsoft Excel</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Proficient in using Microsoft Excel for data analysis and visualization.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Databases -->
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/sql.png" alt="SQL Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">SQL</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Experienced in using SQL for relational database management.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/mongodb.png" alt="MongoDB Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">MongoDB</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Experienced in using MongoDB for NoSQL databases.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Version Control -->
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/git.png" alt="Git Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">Git</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Proficient in using Git for version control.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/github.png" alt="GitHub Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">GitHub</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Experienced in using GitHub for code hosting and collaboration.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cloud Platforms -->
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/amazon-web-services.png" alt="AWS Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">AWS</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Experienced in using AWS for cloud computing solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Development Environment -->
+                    <div class="skill-card m-4 w-64 h-40">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front flex flex-col items-center justify-center">
+                                <img src="https://img.icons8.com/color/48/000000/visual-studio-code-2019.png" alt="VS Code Logo" class="mb-2"/>
+                                <h3 class="text-xl font-bold">VS Code</h3>
+                            </div>
+                            <div class="skill-card-back flex items-center justify-center">
+                                <p>Proficient in using VS Code for development.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+<!-- -------------------------Projects sectio-------------------------------- -->
+
+        <section class="p-6" id="projects" >
+            <h2 class="text-4xl font-extrabold text-center text-green-500 drop-shadow-lg">Projects</h2>
+            <div class="flex flex-wrap justify-center mt-6 ">
+                <div class="project-card">
+                    <div class="description">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://img.icons8.com/color/48/000000/django.png" alt="Django Logo" class="w-10 h-10"/>
+                            <h3 class="text-xl font-bold">Car Selling Platform (Django)</h3>
+                        </div>
+                        <p class="mt-2">Designed and developed a car-selling platform allowing users to browse, filter, and purchase vehicles. Enhanced user experience with a mobile-responsive UI using Bootstrap. Leveraged MongoDB for faster data storage and query handling, improving database performance by 25%.</p>
+                    </div>
+                    <div class="skills">
+                        <div class="flex flex-wrap justify-center mt-4">
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/django.png" alt="Django Logo"/>
+                                <span class="font-bold">Django</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/html-5.png" alt="HTML5 Logo"/>
+                                <span class="font-bold">HTML5</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS Logo"/>
+                                <span class="font-bold">CSS</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/javascript.png" alt="JavaScript Logo"/>
+                                <span class="font-bold">JavaScript</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/bootstrap.png" alt="Bootstrap Logo"/>
+                                <span class="font-bold">Bootstrap</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="description">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://img.icons8.com/color/48/000000/python.png" alt="Python Logo" class="w-10 h-10"/>
+                            <h3 class="text-xl font-bold">E-commerce</h3>
+                        </div>
+                        <p class="mt-2">Developed a robust eCommerce platform featuring product listings, cart functionality, and user authentication. Integrated a secure payment gateway and admin panel for seamless order and inventory management. Achieved a 15% reduction in page load time by optimizing backend queries.</p>
+                    </div>
+                    <div class="skills">
+                        <div class="flex flex-wrap justify-center mt-4">
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/python.png" alt="Python Logo"/>
+                                <span class="font-bold">Python</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/django.png" alt="Django Logo"/>
+                                <span class="font-bold">Django</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/html-5.png" alt="HTML5 Logo"/>
+                                <span class="font-bold">HTML5</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS Logo"/>
+                                <span class="font-bold">CSS</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/bootstrap.png" alt="Bootstrap Logo"/>
+                                <span class="font-bold">Bootstrap</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/javascript.png" alt="JavaScript Logo"/>
+                                <span class="font-bold">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="description">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://img.icons8.com/color/48/000000/django.png" alt="Django Logo" class="w-10 h-10"/>
+                            <h3 class="text-xl font-bold">FilmSite Clone (Django)</h3>
+                        </div>
+                        <p class="mt-2">Developed a Netflix-inspired web application using Django, featuring user authentication, payment integration, and subscription management. Implemented advanced features like search, watchlist, viewing history, and sorting, along with dynamic plans for personalized user experiences.</p>
+                    </div>
+                    <div class="skills">
+                        <div class="flex flex-wrap justify-center mt-4">
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/python.png" alt="Python Logo"/>
+                                <span class="font-bold">Python</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/bootstrap.png" alt="Bootstrap Logo"/>
+                                <span class="font-bold">Bootstrap</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS Logo"/>
+                                <span class="font-bold">CSS</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/javascript.png" alt="JavaScript Logo"/>
+                                <span class="font-bold">JavaScript</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/django.png" alt="Django Logo"/>
+                                <span class="font-bold">Django</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/sql.png" alt="SQL Logo"/>
+                                <span class="font-bold">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="description">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://img.icons8.com/color/48/000000/power-bi.png" alt="Power BI Logo" class="w-10 h-10"/>
+                            <h3 class="text-xl font-bold">Sales Dashboard (Power BI)</h3>
+                        </div>
+                        <p class="mt-2">Designed an interactive sales dashboard in Power BI to visualize key performance metrics, including revenue trends, product performance, and regional sales analysis, enabling data-driven decision-making.</p>
+                    </div>
+                    <div class="skills">
+                        <div class="flex flex-wrap justify-center mt-4">
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/power-bi.png" alt="Power BI Logo"/>
+                                <span class="font-bold">Power BI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="description">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://img.icons8.com/color/48/000000/artificial-intelligence.png" alt="AI Logo" class="w-10 h-10"/>
+                            <h3 class="text-xl font-bold">Diamond Price Prediction (ML)</h3>
+                        </div>
+                        <p class="mt-2">Developed a Machine Learning model to predict diamond prices based on attributes like carat, cut, clarity, and color. The project involved data preprocessing, model training, and deployment using Flask, making it accessible via a web interface.</p>
+                    </div>
+                    <div class="skills">
+                        <div class="flex flex-wrap justify-center mt-4">
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/python.png" alt="Python Logo"/>
+                                <span class="font-bold">Python</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/numpy.png" alt="NumPy Logo"/>
+                                <span class="font-bold">NumPy</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/pandas.png" alt="Pandas Logo"/>
+                                <span class="font-bold">pandas</span>
+                            </div>
+                            <!-- <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/scikit-learn.png" alt="Scikit-Learn Logo"/>
+                                <span class="font-bold">Scikit-Learn</span>
+                            </div> -->
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/flask.png" alt="Flask Logo"/>
+                                <span class="font-bold">Flask</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/html-5.png" alt="HTML5 Logo"/>
+                                <span class="font-bold">HTML5</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS Logo"/>
+                                <span class="font-bold">CSS</span>
+                            </div>
+                            <!-- <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/machine-learning.png" alt="ML Logo"/>
+                                <span class="font-bold">Machine Learning</span>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="description">
+                        <div class="flex items-center space-x-3">
+                            <img src="https://img.icons8.com/color/48/000000/amazon.png" alt="Amazon Logo" class="w-10 h-10"/>
+                            <h3 class="text-xl font-bold">Amazon Clone (HTML & CSS)</h3>
+                        </div>
+                        <p class="mt-2">Built a responsive Amazon clone using HTML and CSS, replicating the homepage design with a structured layout, product sections, and a navigation bar.</p>
+                    </div>
+                    <div class="skills">
+                        <div class="flex flex-wrap justify-center mt-4">
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/html-5.png" alt="HTML5 Logo"/>
+                                <span class="font-bold">HTML5</span>
+                            </div>
+                            <div class="flex flex-col items-center m-2">
+                                <img src="https://img.icons8.com/color/48/000000/css3.png" alt="CSS Logo"/>
+                                <span class="font-bold">CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Swipe Button (Centered in the Project Section) -->
+        <div class="text-center"> 
+            <div class="text-center">           
+                <div class="mt-8 flex justify-center">
+                    <div class="relative w-72 h-16 bg-gray-800 rounded-full flex items-center justify-start overflow-hidden border border-gray-600 shadow-xl">
+                        <div id="swipeProject" class="w-14 h-14 rounded-full flex items-center justify-center absolute left-1 cursor-pointer transition-all"
+                            style="background: linear-gradient(145deg, #222222, #000000); box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6), -3px -3px 6px rgba(255, 255, 255, 0.1), inset 2px 2px 5px rgba(255, 255, 255, 0.2);">
+                            👉
+                        </div>
+                        <p class="absolute left-1/2 transform -translate-x-1/2 text-white text-lg font-bold drop-shadow-md">
+                            For all projects
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+<!-- ------------------------------Services------------------------------------------ -->
+
+<section class="container mx-auto p-6 sm:p-10 relative" id="Services">
+    <h2 class="text-3xl font-bold text-center text-green-500 mb-6">Services</h2>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
+        
+        <div class="service-box p-4 sm:p-6 md:p-8 rounded-lg shadow-lg text-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/4201/4201973.png" alt="Full-Stack" class="icon mx-auto w-16 h-16 md:w-20 md:h-20">
+            <h2 class="text-green-400 text-2xl md:text-3xl font-semibold">Full-Stack Development</h2>
+            <p class="mt-3 text-gray-300 text-sm md:text-base">Building dynamic, end-to-end applications with front-end and back-end technologies.</p>
+        </div>
+        
+        <div class="service-box p-4 sm:p-6 md:p-8 rounded-lg shadow-lg text-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/3063/3063615.png" alt="Web Development" class="icon mx-auto w-16 h-16 md:w-20 md:h-20">
+            <h2 class="text-green-400 text-2xl md:text-3xl font-semibold">Web Development</h2>
+            <p class="mt-3 text-gray-300 text-sm md:text-base">Creating responsive websites using HTML, CSS, JavaScript, and Django.</p>
+        </div>
+        
+        <div class="service-box p-4 sm:p-6 md:p-8 rounded-lg shadow-lg text-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/2991/2991128.png" alt="Data Analysis" class="icon mx-auto w-16 h-16 md:w-20 md:h-20">
+            <h2 class="text-green-400 text-2xl md:text-3xl font-semibold">Data Analysis</h2>
+            <p class="mt-3 text-gray-300 text-sm md:text-base">Analyzing data using Python, Pandas, and Power BI.</p>
+        </div>
+        
+        <div class="service-box p-4 sm:p-6 md:p-8 rounded-lg shadow-lg text-center">
+            <img src="https://cdn-icons-png.flaticon.com/512/2721/2721263.png" alt="Machine Learning" class="icon mx-auto w-16 h-16 md:w-20 md:h-20">
+            <h2 class="text-green-400 text-2xl md:text-3xl font-semibold">Machine Learning</h2>
+            <p class="mt-3 text-gray-300 text-sm md:text-base">Developing AI models for automation using Python and TensorFlow.</p>
+        </div>
+        
+    </div>
+</section>
+
+
+<!-- ---------------------Education & Certifications Section ----->
+
+<section class="py-16">
+    <h2 class="text-center text-3xl font-bold text-green-500 mb-8">Education & Certifications</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+        <!-- Education -->
+        <div class="bg-black text-white p-7 rounded-lg border border-gray-500 shadow-lg min-h-[280px]">
+            <h3 class="text-xl font-bold text-green-400">🎓 Education</h3>
+            <ul class="mt-4 space-y-3">
+                <li><strong>Bachelor of Commerce (B.Com)</strong> - S.P. College, Pune University (2025)</li>
+                <li><strong>Data Software Engineering</strong> - IT Vedant Pvt. Ltd. (2024)</li>
+            </ul>
+        </div>
+
+        <!-- Certifications -->
+        <div class="bg-black text-white p-7 rounded-lg border border-gray-500 shadow-lg min-h-[280px]">
+            <h3 class="text-xl font-bold text-green-400">🏆 Certifications</h3>
+            <ul class="mt-4 space-y-3">
+                <li>Web Developer - Cognifyz Technology</li>
+                <li>Python for Web Development - IBM</li>
+                <li>Masters in Data Software Engineering</li>
+            </ul>
+        </div>
+
+        <!-- Trading Class -->
+        <div class="bg-black text-white p-7 rounded-lg border border-gray-500 shadow-lg min-h-[280px]">
+            <h3 class="text-xl font-bold text-green-400">📈 Stock Market Analyasis</h3>
+            <ul class="mt-4 space-y-3">
+                <li>Attended a trading class in 2021 at <strong>Bharti Share Market Classes</strong>, where I gained in-depth knowledge of stock market fundamentals, technical analysis, risk management, and investment strategies.</li>
+
+            </ul>
+        </div>
+    </div>
+                      
+    <!-- Swipe Button (Centered in the Project Section) -->
+    <div class="text-center"> 
+        <div class="text-center">           
+            <!-- Swipe Button (Centered in the Project Section) -->
+            <div class="mt-8 flex justify-center">
+                <div class="relative w-72 h-16 bg-gray-800 rounded-full flex items-center justify-start overflow-hidden border border-gray-600 shadow-xl">
+                    <div id="swipeCertifications"
+                        class="w-14 h-14 rounded-full flex items-center justify-center absolute left-1 cursor-pointer transition-all"
+                        style="background: linear-gradient(145deg, #222222, #000000);
+                            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6), 
+                                        -3px -3px 6px rgba(255, 255, 255, 0.1), 
+                                        inset 2px 2px 5px rgba(255, 255, 255, 0.2);">
+                        👉
+                    </div>
+                    <p class="absolute left-1/2 transform -translate-x-1/2 text-white text-lg font-bold drop-shadow-md">
+                        All Certifications
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!------------------------------- Inquiry Form Section ------------------------->
+
+<section id="inquiry" class="py-8">
+    <h2 class="text-center text-3xl font-bold text-green-500 mb-6">Inquiry Form</h2>
+
+    <div class="max-w-3xl mx-auto flex flex-col md:flex-row bg-black p-8 rounded-lg shadow-lg border border-green-500">
+        <!-- Left Side: Logo -->
+        <div class="w-full md:w-1/3 flex justify-center items-center mb-6 md:mb-0">
+            <img src="pa.png" alt="Logo" class="w-32 h-32 object-contain">
+        </div>
+
+        <!-- Right Side: Form Button -->
+        <div class="w-full md:w-2/3 flex flex-col justify-center items-center">
+            <button onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLScBOKK3iwZLgZg9-m-B85-So6GB6w0_qgJXwsIWqhPf1qzEgA/viewform?usp=header', '_blank')" 
+                class="px-6 py-3 bg-green-500 text-black font-bold rounded-full hover:bg-green-600 transition duration-300">
+                Open Contact Form
+            </button>
+
+            <p id="response-message" class="text-center text-white mt-4"></p>
+        </div>
+    </div>
+</section>
+
+<!-------------------------------- Feedback section rating ------------------------------->
+
+<section id="rate-us" class="py-8">
+    <h2 class="text-center text-3xl font-bold text-green-500 mb-6">Rate Our Website</h2>
+
+    <div class="max-w-3xl mx-auto p-6 bg-black rounded-lg shadow-lg border border-green-500 text-center">
+        <h3 class="text-white text-xl font-semibold mb-4">How was your experience?</h3>
+        
+        <!-- Star Rating -->
+        <div class="flex justify-center space-x-3 text-5xl" id="star-container">
+            <span class="star text-gray-500 cursor-pointer transition duration-300" data-value="1">&#9733;</span>
+            <span class="star text-gray-500 cursor-pointer transition duration-300" data-value="2">&#9733;</span>
+            <span class="star text-gray-500 cursor-pointer transition duration-300" data-value="3">&#9733;</span>
+            <span class="star text-gray-500 cursor-pointer transition duration-300" data-value="4">&#9733;</span>
+            <span class="star text-gray-500 cursor-pointer transition duration-300" data-value="5">&#9733;</span>
+        </div>
+
+        <!-- Submit Button -->
+        <button id="submit-btn" class="hidden mt-4 px-6 py-2 bg-green-500 text-black font-bold rounded-full hover:bg-green-600 transition duration-300">
+            Submit
+        </button>
+
+        <!-- Feedback Message -->
+        <p id="rating-message" class="text-green-400 mt-3 text-lg font-semibold"></p>
+    </div>
+</section>
+
+<!-- ---------------------------Social media section------------------------------- -->
+
+<section class="py-8">
+    <h2 class="text-center text-3xl font-bold text-green-500 mb-10">Connect with me</h2>
+    <div class="flex justify-center space-x-10 pl-4">
+        
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/aryanpote" target="_blank" class="text-white text-5xl hover:text-blue-400">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <!-- GitHub -->
+        <a href="https://github.com/Aryanp7272" target="_blank" class="text-white text-5xl hover:text-gray-400">
+            <i class="fab fa-github"></i>
+        </a>
+
+        <!-- Twitter/X -->
+        <a href="https://twitter.com/aryanpote72" target="_blank" class="text-white text-5xl hover:text-blue-500">
+            <i class="fab fa-twitter"></i>
+        </a>
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/___aryan___7272" target="_blank" class="text-white text-5xl hover:text-pink-500">
+            <i class="fab fa-instagram"></i>
+        </a>
+
+    </div>
+</section>
+<!-- ------------------------Copyrights------------------------ -->
+
+<footer class="bg-black text-gray-400 text-center py-2 mt-2 mb-4">
+    <p>&copy; <span id="year"></span> Aryan Sanjay Pote. All rights reserved.</p>
+</footer>
+
+<!-- -----------------------------END-------------------------------- -->
+
+
+<!-- --------------------------Javascripts start from--------------------------------- -->
+<script>
+    particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffffff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        },
+                        "image": {
+                            "src": "img/github.svg",
+                            "width": 100,
+                            "height": 100
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#ffffff",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 6,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "repulse"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 400,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            document.getElementById('menu-button').addEventListener('click', function() {                   /* Mobile menu navbar js */ 
+                var menu = document.getElementById('mobile-menu');
+                if (menu.classList.contains('hidden')) {
+                    menu.classList.remove('hidden');
+                } else {
+                    menu.classList.add('hidden');
+                }
+            });
+
+
+            document.addEventListener("DOMContentLoaded", function () {                                     /* Swip Button js js */  
+                function setupSwipeButton(buttonId, url) {
+                    const swipeCircle = document.getElementById(buttonId);
+                    let isSwiped = false;
+    
+                    function startSwipe(event) {
+                        let startX = event.clientX || event.touches[0].clientX;
+                        let container = swipeCircle.parentElement;
+                        let maxMove = container.offsetWidth - swipeCircle.offsetWidth - 10;
+                        
+                        function moveSwipe(event) {
+                            let newX = (event.clientX || event.touches[0].clientX) - startX;
+                            if (newX < 0) newX = 0;
+                            if (newX > maxMove) newX = maxMove;
+                            swipeCircle.style.transform = `translateX(${newX}px)`;
+                            if (newX >= maxMove) {
+                                isSwiped = true;
+                                window.open(url, "_blank");
+                                removeEventListeners();
+                                resetSwipe();
+                            }
+                        }
+                        
+                        function removeEventListeners() {
+                            document.removeEventListener("mousemove", moveSwipe);
+                            document.removeEventListener("mouseup", stopSwipe);
+                            document.removeEventListener("touchmove", moveSwipe);
+                            document.removeEventListener("touchend", stopSwipe);
+                        }
+                        
+                        function stopSwipe() {
+                            removeEventListeners();
+                            if (!isSwiped) resetSwipe();
+                        }
+                        
+                        document.addEventListener("mousemove", moveSwipe);
+                        document.addEventListener("mouseup", stopSwipe);
+                        document.addEventListener("touchmove", moveSwipe);
+                        document.addEventListener("touchend", stopSwipe);
+                    }
+    
+                    function resetSwipe() {
+                        setTimeout(() => {
+                            swipeCircle.style.transition = "transform 0.5s ease-out";
+                            swipeCircle.style.transform = "translateX(0)";
+                            setTimeout(() => {
+                                swipeCircle.style.transition = "";
+                            }, 500);
+                        }, 1000);
+                    }
+                    
+                    swipeCircle.addEventListener("mousedown", startSwipe);
+                    swipeCircle.addEventListener("touchstart", startSwipe);
+                }
+                
+                setupSwipeButton("swipeProject", "https://github.com/Aryanp7272");
+                setupSwipeButton("swipeCertifications", "https://github.com/Aryanp7272/All-certification-s");
+            });
+
+            function confirmCall() {                                                                       /* Calling confirm call js */ 
+                let confirmAction = confirm("Do you want to call Aryan at +91 8182037272?");
+                if (confirmAction) {
+                    if (navigator.userAgent.match(/Android/i)) {
+                        window.location.href = "tel:+918182037272"; // Direct Call for Android
+                    } else if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+                        window.location.href = "tel://+918182037272"; // iOS Format
+                    } else {
+                        alert("Your device may not support direct calling.");
+                    }
+                }
+            }
+
+    document.getElementById("year").textContent = new Date().getFullYear();                            /* Copyrights auto change yr  js */ 
+
+    document.addEventListener("DOMContentLoaded", function () {                                        /* Skills slide back  js */ 
+        document.querySelectorAll(".skill-card").forEach(function (card) {
+            card.addEventListener("click", function () {
+                this.querySelector(".skill-card-inner").classList.toggle("rotate");
+            });
+        });
+    });
+
+    document.querySelectorAll('a').forEach(link => {                                                    /* Mobile touch js */ 
+        link.addEventListener('touchstart', () => {
+            link.classList.add('hover-effect');
+        });
+    
+        link.addEventListener('touchend', () => {
+            setTimeout(() => link.classList.remove('hover-effect'), 500);
+        }); 
+    });
+    
+    
+
+    document.addEventListener("DOMContentLoaded", function () {                                        /* Projects slide back  js */ 
+        document.querySelectorAll(".project-card").forEach(function (card) {
+            card.addEventListener("click", function () {
+                // Toggle classes for mobile behavior
+                let description = this.querySelector(".description");
+                let skills = this.querySelector(".skills");
+    
+                if (description.style.display === "none") {
+                    description.style.display = "block";
+                    skills.style.display = "none";
+                } else {
+                    description.style.display = "none";
+                    skills.style.display = "block";
+                }
+            });
+        });
+    });
+
+    document.querySelectorAll(".service-box").forEach(box => {                                        /* Service section js */ 
+        box.addEventListener("touchstart", () => {
+            box.classList.add("hover-effect");
+        });
+    
+        box.addEventListener("touchend", () => {
+            setTimeout(() => box.classList.remove("hover-effect"), 500);
+        });
+    });
+            
+    document.addEventListener("DOMContentLoaded", function () {                                        /* Live name in about FSD js */ 
+        const roles = ["Full-Stack Developer", "Web Developer", "Data Analyst", "Machine Learning Engineer"];
+        const wordElement = document.querySelector(".changing-word");
+        let index = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function typeEffect() {
+            let currentText = roles[index];
+            
+            if (!isDeleting) {
+                // Typing effect: Add one letter at a time
+                wordElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+
+                if (charIndex === currentText.length) {
+                    isDeleting = true;
+                    setTimeout(typeEffect, 1500); // Pause before erasing
+                    return;
+                }
+            } else {
+                // Erasing effect: Remove one letter at a time
+                wordElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    index = (index + 1) % roles.length; // Move to next role
+                }
+            }
+
+            setTimeout(typeEffect, isDeleting ? 50 : 100); // Faster erase, slower type
+        }
+
+        typeEffect(); // Start animation
+    });
+
+    const stars = document.querySelectorAll(".star");                                                 /* feedback star rating  js */ 
+    const submitBtn = document.getElementById("submit-btn");
+    const ratingMessage = document.getElementById("rating-message");
+    let selectedRating = 0;
+
+    // Star selection
+    stars.forEach((star, index) => {
+        star.addEventListener("click", function () {
+            selectedRating = index + 1;
+
+            // Highlight stars up to the selected one
+            stars.forEach((s, i) => {
+                s.classList.toggle("text-yellow-400", i < selectedRating);
+            });
+
+            // Show Submit button
+            submitBtn.classList.remove("hidden");
+        });
+    });
+
+    // Submit button click
+    submitBtn.addEventListener("click", function () {                                                  /* Rating pop up message js */ 
+        if (selectedRating > 0) {
+            ratingMessage.textContent = "Thank you for rating us!";
+            submitBtn.classList.add("hidden"); // Hide button after submission
+        }
+    });
+
+
+    
+    </script>
+    </body>
+    </html>
